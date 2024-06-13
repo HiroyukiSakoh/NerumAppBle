@@ -28,72 +28,71 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LabelAddress = new System.Windows.Forms.Label();
-            this.TextBoxAddress = new System.Windows.Forms.TextBox();
-            this.ButtonLounchBedController = new System.Windows.Forms.Button();
-            this.ButtonDebug = new System.Windows.Forms.Button();
-            this.SuspendLayout();
-            // 
-            // LabelAddress
-            // 
-            this.LabelAddress.AutoSize = true;
-            this.LabelAddress.Location = new System.Drawing.Point(12, 9);
-            this.LabelAddress.Name = "LabelAddress";
-            this.LabelAddress.Size = new System.Drawing.Size(49, 15);
-            this.LabelAddress.TabIndex = 0;
-            this.LabelAddress.Text = "Address";
-            // 
-            // TextBoxAddress
-            // 
-            this.TextBoxAddress.Location = new System.Drawing.Point(67, 5);
-            this.TextBoxAddress.Name = "TextBoxAddress";
-            this.TextBoxAddress.Size = new System.Drawing.Size(124, 23);
-            this.TextBoxAddress.TabIndex = 1;
-            this.TextBoxAddress.Text = "30E283XXXXXX";
+            ButtonLounchBedController = new Button();
+            ButtonDebug = new Button();
+            ComboBoxAddresses = new ComboBox();
+            ButtonScan = new Button();
+            SuspendLayout();
             // 
             // ButtonLounchBedController
             // 
-            this.ButtonLounchBedController.Location = new System.Drawing.Point(197, 5);
-            this.ButtonLounchBedController.Name = "ButtonLounchBedController";
-            this.ButtonLounchBedController.Size = new System.Drawing.Size(75, 23);
-            this.ButtonLounchBedController.TabIndex = 2;
-            this.ButtonLounchBedController.Text = "接続";
-            this.ButtonLounchBedController.UseVisualStyleBackColor = true;
-            this.ButtonLounchBedController.Click += new System.EventHandler(this.ButtonLounchBedController_Click);
+            ButtonLounchBedController.Location = new Point(149, 35);
+            ButtonLounchBedController.Name = "ButtonLounchBedController";
+            ButtonLounchBedController.Size = new Size(60, 23);
+            ButtonLounchBedController.TabIndex = 2;
+            ButtonLounchBedController.Text = "接続";
+            ButtonLounchBedController.UseVisualStyleBackColor = true;
+            ButtonLounchBedController.Click += ButtonLounchBedController_Click;
             // 
             // ButtonDebug
             // 
-            this.ButtonDebug.Location = new System.Drawing.Point(197, 34);
-            this.ButtonDebug.Name = "ButtonDebug";
-            this.ButtonDebug.Size = new System.Drawing.Size(75, 23);
-            this.ButtonDebug.TabIndex = 2;
-            this.ButtonDebug.Text = "Debug";
-            this.ButtonDebug.UseVisualStyleBackColor = true;
-            this.ButtonDebug.Click += new System.EventHandler(this.btnDebug_Click);
+            ButtonDebug.Location = new Point(215, 34);
+            ButtonDebug.Name = "ButtonDebug";
+            ButtonDebug.Size = new Size(57, 23);
+            ButtonDebug.TabIndex = 2;
+            ButtonDebug.Text = "Debug";
+            ButtonDebug.UseVisualStyleBackColor = true;
+            ButtonDebug.Click += btnDebug_Click;
+            // 
+            // ComboBoxAddresses
+            // 
+            ComboBoxAddresses.DropDownStyle = ComboBoxStyle.DropDownList;
+            ComboBoxAddresses.FormattingEnabled = true;
+            ComboBoxAddresses.Location = new Point(12, 6);
+            ComboBoxAddresses.Name = "ComboBoxAddresses";
+            ComboBoxAddresses.Size = new Size(260, 23);
+            ComboBoxAddresses.TabIndex = 3;
+            // 
+            // ButtonScan
+            // 
+            ButtonScan.Location = new Point(12, 34);
+            ButtonScan.Name = "ButtonScan";
+            ButtonScan.Size = new Size(131, 23);
+            ButtonScan.TabIndex = 4;
+            ButtonScan.Text = "アドバタイズ受信";
+            ButtonScan.UseVisualStyleBackColor = true;
+            ButtonScan.Click += ButtonScan_Click;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 61);
-            this.Controls.Add(this.ButtonDebug);
-            this.Controls.Add(this.ButtonLounchBedController);
-            this.Controls.Add(this.TextBoxAddress);
-            this.Controls.Add(this.LabelAddress);
-            this.MaximumSize = new System.Drawing.Size(300, 100);
-            this.MinimumSize = new System.Drawing.Size(300, 100);
-            this.Name = "MainForm";
-            this.Text = "MainForm";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(284, 61);
+            Controls.Add(ButtonScan);
+            Controls.Add(ComboBoxAddresses);
+            Controls.Add(ButtonDebug);
+            Controls.Add(ButtonLounchBedController);
+            MaximumSize = new Size(300, 100);
+            MinimumSize = new Size(300, 100);
+            Name = "MainForm";
+            Text = "MainForm";
+            ResumeLayout(false);
         }
 
         #endregion
-
-        private Label LabelAddress;
-        private TextBox TextBoxAddress;
         private Button ButtonLounchBedController;
         private Button ButtonDebug;
+        private ComboBox ComboBoxAddresses;
+        private Button ButtonScan;
     }
 }

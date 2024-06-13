@@ -137,9 +137,15 @@ namespace NerumAppBle
                     }
                     var response = new NotifyAlarmStatus()
                     {
-                        Time = new TimeOnly(data[3], data[4]),
-                        Repeat = (AlarmRepeat)data[5],
-                        Type = (AlarmType)data[6]
+                        Time1 = new TimeOnly(data[3], data[4]),
+                        Repeat1 = (AlarmRepeat)data[5],
+                        Type1 = (AlarmType)data[6],
+                        Time2 = new TimeOnly(data[7], data[8]),
+                        Repeat2 = (AlarmRepeat)data[9],
+                        Type2 = (AlarmType)data[10],
+                        Time3 = new TimeOnly(data[11], data[12]),
+                        Repeat3 = (AlarmRepeat)data[13],
+                        Type3 = (AlarmType)data[14]
                     };
                     WriteDebug($"{BitConverter.ToString(data)}⇒{response}");
                     OnNotifyAlarmStatus?.Invoke(this, response);
@@ -231,7 +237,10 @@ namespace NerumAppBle
             await WriteCommandAsync(GetE6FE16Command(E6FE16.Query));
         }
 
-        public async Task SetAlarmAsync(TimeOnly time, AlarmRepeat alarmRepeat, AlarmType alarmType)
+        public async Task SetAlarmAsync(
+            TimeOnly time1, AlarmRepeat alarmRepeat1, AlarmType alarmType1,
+            TimeOnly time2, AlarmRepeat alarmRepeat2, AlarmType alarmType2,
+            TimeOnly time3, AlarmRepeat alarmRepeat3, AlarmType alarmType3)
         {
             //例
             //ed80030700ff13000000000000000076
@@ -240,14 +249,28 @@ namespace NerumAppBle
             //1byte 00 min
             //1byte ff repeat be=平日,ff=全部,c0=土曜日,00=empty(1bit目=on/off)
             //1byte 13 type 00=なし,11=M1,13=M2,12=灯り(1bit目=on/off?)
-            //8byte 000000000000000 常に0
+            //1byte 07 hour
+            //1byte 00 min
+            //1byte ff repeat be=平日,ff=全部,c0=土曜日,00=empty(1bit目=on/off)
+            //1byte 13 type 00=なし,11=M1,13=M2,12=灯り(1bit目=on/off?)
+            //1byte 07 hour
+            //1byte 00 min
+            //1byte ff repeat be=平日,ff=全部,c0=土曜日,00=empty(1bit目=on/off)
+            //1byte 13 type 00=なし,11=M1,13=M2,12=灯り(1bit目=on/off?)
             await WriteCommandAsync(new byte[] {
                 0xED, 0x80, 0x03
-                , (byte)time.Hour
-                , (byte)time.Minute
-                ,(byte)alarmRepeat
-                ,(byte)alarmType
-                , 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00});
+                , (byte)time1.Hour
+                , (byte)time1.Minute
+                ,(byte)alarmRepeat1
+                ,(byte)alarmType1
+                , (byte)time2.Hour
+                , (byte)time2.Minute
+                ,(byte)alarmRepeat2
+                ,(byte)alarmType2
+                , (byte)time3.Hour
+                , (byte)time3.Minute
+                ,(byte)alarmRepeat3
+                ,(byte)alarmType3});
             await SetDateTimeAsync(DateTime.Now);
         }
 
@@ -446,16 +469,28 @@ namespace NerumAppBle
         public event EventHandler<NotifyAlarmStatus>? OnNotifyAlarmStatus;
         public class NotifyAlarmStatus
         {
-            public TimeOnly Time { get; set; }
-            public AlarmRepeat Repeat { get; set; }
-            public AlarmType Type { get; set; }
+            public TimeOnly Time1 { get; set; }
+            public AlarmRepeat Repeat1 { get; set; }
+            public AlarmType Type1 { get; set; }
+            public TimeOnly Time2 { get; set; }
+            public AlarmRepeat Repeat2 { get; set; }
+            public AlarmType Type2 { get; set; }
+            public TimeOnly Time3 { get; set; }
+            public AlarmRepeat Repeat3 { get; set; }
+            public AlarmType Type3 { get; set; }
 
             public override string ToString()
             {
                 var sb = new StringBuilder();
-                sb.Append($"{nameof(Time)}={Time:HH:mm}");
-                sb.Append($",{nameof(Repeat)}={Repeat}");
-                sb.Append($",{nameof(Type)}={Type}");
+                sb.Append($"{nameof(Time1)}={Time1:HH:mm}");
+                sb.Append($",{nameof(Repeat1)}={Repeat1}");
+                sb.Append($",{nameof(Type1)}={Type1}");
+                sb.Append($"{nameof(Time2)}={Time2:HH:mm}");
+                sb.Append($",{nameof(Repeat2)}={Repeat2}");
+                sb.Append($",{nameof(Type2)}={Type2}");
+                sb.Append($"{nameof(Time3)}={Time3:HH:mm}");
+                sb.Append($",{nameof(Repeat3)}={Repeat3}");
+                sb.Append($",{nameof(Type3)}={Type3}");
                 return sb.ToString();
             }
         }

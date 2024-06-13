@@ -2,7 +2,7 @@
 
 スマートベッド Nerum app を BLE経由で操作する試作アプリ
 
-* 指定したBluetoothAddressに接続
+* アドバタイズを受信し、特定のServiceUUIDを持つデバイスを列挙、そこに接続する
 
   ![Main](./images/1.png)
 
